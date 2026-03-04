@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-# Load trained model safely
+# Load model safely
 try:
     with open("model.pkl", "rb") as file:
         model = pickle.load(file)
@@ -13,13 +13,12 @@ except Exception as e:
     model = None
     print(f"Error loading model.pkl: {e}")
 
-# Load training data to get feature columns
+# Load training feature columns
 try:
     data = pd.read_csv("tel_churn.csv")
     data.drop("Unnamed: 0", axis=1, inplace=True, errors='ignore')
     feature_columns = data.drop("Churn", axis=1).columns
 except Exception as e:
-    data = None
     feature_columns = []
     print(f"Error loading tel_churn.csv: {e}")
 
@@ -36,27 +35,34 @@ def predict():
         if model is None or not feature_columns:
             return "Model or feature columns not loaded correctly."
 
-        # Get form data and replace empty strings with 0
-        input_data = {k: (v if v.strip() != "" else 0) for k, v in request.form.to_dict().items()}
+        # Get form data
+        input_data = request.form.to_dict()
+
+        # Fill empty fields with 0
+        for k, v in input_data.items():
+            if v.strip() == "":
+                input_data[k] = 0
 
         input_df = pd.DataFrame([input_data])
 
         # Convert numeric columns safely
-        for col in ["MonthlyCharges", "TotalCharges"]:
+        numeric_cols = ["MonthlyCharges", "TotalCharges"]
+        for col in numeric_cols:
             if col in input_df.columns:
                 input_df[col] = pd.to_numeric(input_df[col], errors='coerce').fillna(0)
 
-        # Apply dummy encoding
+        # Dummy encode categorical variables
         input_df = pd.get_dummies(input_df)
 
-        # Reindex safely to match training columns
+        # Reindex to match training columns
+        # This ensures all missing columns are added and extra columns are ignored
         input_df = input_df.reindex(columns=feature_columns, fill_value=0)
 
-        # Ensure numeric columns are float
-        input_df = input_df.astype(float)
+        # Now we are sure input_df matches the model
+        prediction_array = model.predict(input_df)
 
-        # Predict
-        prediction = model.predict(input_df)[0]
+        # Extract the first prediction safely
+        prediction = int(prediction_array[0])
 
         result = "Customer is Likely to Churn ❌" if prediction == 1 else "Customer is Not Likely to Churn ✅"
 
