@@ -1,85 +1,99 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Churn Prediction</title>
+    <meta charset="UTF-8">
+    <title>Telco Customer Churn Prediction</title>
     <style>
         body {
-            font-family: Arial;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
         }
-
         .container {
-            background: white;
+            max-width: 600px;
+            margin: 50px auto;
             padding: 30px;
+            background-color: #fff;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px gray;
-            width: 300px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
         input, select {
             width: 100%;
             padding: 8px;
             margin-top: 5px;
-            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
         }
-
         button {
-            width: 100%;
+            margin-top: 20px;
             padding: 10px;
-            background-color: blue;
+            width: 100%;
+            background-color: #007bff;
             color: white;
+            font-size: 16px;
             border: none;
             border-radius: 5px;
+            cursor: pointer;
         }
-
         button:hover {
-            background-color: darkblue;
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Telco Customer Churn Prediction</h1>
+        <form action="/predict" method="post">
+            <label for="MonthlyCharges">Monthly Charges:</label>
+            <input type="number" step="0.01" id="MonthlyCharges" name="MonthlyCharges" required>
 
-<div class="container">
-    <h2>Customer Churn Prediction</h2>
+            <label for="TotalCharges">Total Charges:</label>
+            <input type="number" step="0.01" id="TotalCharges" name="TotalCharges" required>
 
-    <form action="/predict" method="POST">
+            <label for="Contract">Contract:</label>
+            <select id="Contract" name="Contract">
+                <option value="Month-to-month">Month-to-month</option>
+                <option value="One year">One year</option>
+                <option value="Two year">Two year</option>
+            </select>
 
-        <label>Monthly Charges:</label>
-        <input type="number" name="MonthlyCharges" required>
+            <label for="InternetService">Internet Service:</label>
+            <select id="InternetService" name="InternetService">
+                <option value="DSL">DSL</option>
+                <option value="Fiber optic">Fiber optic</option>
+                <option value="No">No</option>
+            </select>
 
-        <label>Total Charges:</label>
-        <input type="number" name="TotalCharges" required>
+            <label for="PaymentMethod">Payment Method:</label>
+            <select id="PaymentMethod" name="PaymentMethod">
+                <option value="Electronic check">Electronic check</option>
+                <option value="Mailed check">Mailed check</option>
+                <option value="Bank transfer (automatic)">Bank transfer (automatic)</option>
+                <option value="Credit card (automatic)">Credit card (automatic)</option>
+            </select>
 
-        <label>Contract:</label>
-        <select name="Contract">
-            <option value="Month-to-month">Month-to-month</option>
-            <option value="One year">One year</option>
-            <option value="Two year">Two year</option>
-        </select>
+            <button type="submit">Predict Churn</button>
+        </form>
 
-        <label>Internet Service:</label>
-        <select name="InternetService">
-            <option value="DSL">DSL</option>
-            <option value="Fiber optic">Fiber optic</option>
-            <option value="No">No</option>
-        </select>
-
-        <label>Payment Method:</label>
-        <select name="PaymentMethod">
-            <option value="Electronic check">Electronic check</option>
-            <option value="Mailed check">Mailed check</option>
-            <option value="Bank transfer (automatic)">Bank transfer</option>
-            <option value="Credit card (automatic)">Credit card</option>
-        </select>
-
-        <button type="submit">Predict</button>
-
-    </form>
-</div>
-
+        {% if prediction_text %}
+            <div class="result">{{ prediction_text }}</div>
+        {% endif %}
+    </div>
 </body>
 </html>
