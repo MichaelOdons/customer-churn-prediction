@@ -1,43 +1,85 @@
-<form action="/predict" method="POST">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Churn Prediction</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-<label>Monthly Charges:</label>
-<input type="number" name="MonthlyCharges" required>
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+            width: 300px;
+        }
 
-<br><br>
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
 
-<label>Total Charges:</label>
-<input type="number" name="TotalCharges" required>
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
 
-<br><br>
+        button:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
 
-<label>Contract:</label>
-<select name="Contract">
-    <option value="Month-to-month">Month-to-month</option>
-    <option value="One year">One year</option>
-    <option value="Two year">Two year</option>
-</select>
+<div class="container">
+    <h2>Customer Churn Prediction</h2>
 
-<br><br>
+    <form action="/predict" method="POST">
 
-<label>Internet Service:</label>
-<select name="InternetService">
-    <option value="DSL">DSL</option>
-    <option value="Fiber optic">Fiber optic</option>
-    <option value="No">No</option>
-</select>
+        <label>Monthly Charges:</label>
+        <input type="number" name="MonthlyCharges" required>
 
-<br><br>
+        <label>Total Charges:</label>
+        <input type="number" name="TotalCharges" required>
 
-<label>Payment Method:</label>
-<select name="PaymentMethod">
-    <option value="Electronic check">Electronic check</option>
-    <option value="Mailed check">Mailed check</option>
-    <option value="Bank transfer (automatic)">Bank transfer (automatic)</option>
-    <option value="Credit card (automatic)">Credit card (automatic)</option>
-</select>
+        <label>Contract:</label>
+        <select name="Contract">
+            <option value="Month-to-month">Month-to-month</option>
+            <option value="One year">One year</option>
+            <option value="Two year">Two year</option>
+        </select>
 
-<br><br>
+        <label>Internet Service:</label>
+        <select name="InternetService">
+            <option value="DSL">DSL</option>
+            <option value="Fiber optic">Fiber optic</option>
+            <option value="No">No</option>
+        </select>
 
-<button type="submit">Predict</button>
+        <label>Payment Method:</label>
+        <select name="PaymentMethod">
+            <option value="Electronic check">Electronic check</option>
+            <option value="Mailed check">Mailed check</option>
+            <option value="Bank transfer (automatic)">Bank transfer</option>
+            <option value="Credit card (automatic)">Credit card</option>
+        </select>
 
-</form>
+        <button type="submit">Predict</button>
+
+    </form>
+</div>
+
+</body>
+</html>
