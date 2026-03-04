@@ -59,15 +59,10 @@ def predict():
         # Apply dummy encoding
         input_df = pd.get_dummies(input_df)
 
-        # Add missing columns
-        for col in feature_columns:
-            if col not in input_df.columns:
-                input_df[col] = 0
+        # **Reindex to match training columns safely**
+        input_df = input_df.reindex(columns=feature_columns, fill_value=0)
 
-        # Ensure same column order
-        input_df = input_df[feature_columns]
-
-        # Predict (extract first element from array)
+        # Predict
         prediction = model.predict(input_df)[0]
 
         # Build result string
