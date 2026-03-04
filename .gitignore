@@ -13,11 +13,11 @@ mlproj/
 .ipynb_checkpoints/
 
 # Data files
-*.csv
+# *.csv
 *.xlsx
 
 # Pickle files (optional: keep if sharing model)
-*.pkl
+# *.pkl
 
 # VS Code
 .vscode/
