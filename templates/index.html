@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Churn Predictor</title>
+</head>
+<body>
+    <h1>Customer Churn Predictor</h1>
+    <form action="/predict" method="post">
+        <label for="MonthlyCharges">Monthly Charges:</label>
+        <input type="text" name="MonthlyCharges" required><br><br>
+
+        <label for="TotalCharges">Total Charges:</label>
+        <input type="text" name="TotalCharges" required><br><br>
+
+        <!-- Add other features as needed -->
+
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if prediction_text %}
+        <h2>{{ prediction_text }}</h2>
+    {% endif %}
+</body>
+</html>
