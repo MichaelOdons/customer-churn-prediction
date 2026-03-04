@@ -42,16 +42,18 @@ def predict():
         input_df = pd.DataFrame([input_data])
 
         # Convert numeric columns safely
-        numeric_cols = ["MonthlyCharges", "TotalCharges"]
-        for col in numeric_cols:
+        for col in ["MonthlyCharges", "TotalCharges"]:
             if col in input_df.columns:
                 input_df[col] = pd.to_numeric(input_df[col], errors='coerce').fillna(0)
 
         # Apply dummy encoding
         input_df = pd.get_dummies(input_df)
 
-        # Reindex to match training columns safely
+        # Reindex safely to match training columns
         input_df = input_df.reindex(columns=feature_columns, fill_value=0)
+
+        # Ensure numeric columns are float
+        input_df = input_df.astype(float)
 
         # Predict
         prediction = model.predict(input_df)[0]
