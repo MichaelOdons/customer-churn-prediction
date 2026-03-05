@@ -117,5 +117,5 @@ Dataset used: `WA_Fn-UseC_-Telco-Customer-Churn.csv`
 ## Usage
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/telecom-churn-prediction.git
+git clone https://github.com/MichaelOdons/telecom-churn-prediction.git
 cd telecom-churn-prediction
