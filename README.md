@@ -15,7 +15,7 @@
 10. [Usage](#usage)
 11. [Conclusion](#conclusion)
 12. [Future Improvements](#future-improvements)
-13. [Contact](#contact)
+
 
 ---
 
@@ -119,3 +119,22 @@ Dataset used: `WA_Fn-UseC_-Telco-Customer-Churn.csv`
 ```bash
 git clone https://github.com/MichaelOdons/telecom-churn-prediction.git
 cd telecom-churn-prediction
+```
+---
+
+## Conclusion
+This project demonstrates how **machine learning** can predict telecom customer churn using just a few key features.  
+Key takeaways:  
+
+- **High-risk factors**: Month-to-month contracts, electronic check payments, no tech support, no online security, and non-senior citizens.  
+- **Low-impact factors**: Gender, phone service, and multiple lines.  
+- The model helps telecom companies **proactively identify customers at risk of leaving** and take action.
+
+---
+
+## Future Improvements
+- Include more customer behavior features like **customer support calls, usage patterns, and promotions**.  
+- Build a **real-time API** so other systems can call the model directly.  
+- Use **more advanced models** like XGBoost or Neural Networks for higher accuracy.  
+- Add **visual dashboards** to show churn trends and predictions for business stakeholders.
+
