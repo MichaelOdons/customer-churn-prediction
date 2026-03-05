@@ -101,7 +101,7 @@ Dataset used: `WA_Fn-UseC_-Telco-Customer-Churn.csv`
 - Built **Flask Web App** with two routes:
   - `/` – homepage with input form
   - `/predict` – POST request for predictions
-- Hosted on **Railway** cloud platform: [Churn Prediction App](https://web-production-e2af2.up.railway.app/predict)
+- Hosted on **Railway** cloud platform: [Churn Prediction App](web-production-e2af2.up.railway.app)
 - Input form captures:
   - Monthly Charges
   - Total Charges
